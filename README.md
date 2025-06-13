@@ -1,4 +1,4 @@
-# Quartex Data Cleaning and Metadata Post-Processing Documentation
+# AMQuartex Data Cleaning and Metadata Preparation
 
 This document outlines the current data cleaning pipeline used to prepare MODS-mapped metadata (`step4-output_4.csv`) for ingestion into AM Quartex. It includes:
 
