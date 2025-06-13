@@ -75,22 +75,23 @@ Automatically detects and converts:
 
 ## ✅ **How the Script Aligns with AM Quartex Cleaning Criteria**
 
-| Quartex Criteria                                 | Script Handles? | Notes                                                      |
-| ------------------------------------------------ | --------------- | ---------------------------------------------------------- |
-| CSV Format & UTF-8 Encoding                      | ✅               | Cleaned text, normalized characters                        |
-| One Record Level per File                        | ✅               | Your CSV is asset-level only                               |
-| File Size <10MB                                  | ⚠️ Manual        | No automatic file splitting yet                            |
-| Date Formats (`YYYY-MM-DD`, etc.)                | ✅               | Uses `pd.to_datetime()` and detects valid formats          |
-| Required Fields Populated                        | ❌               | Cleans, but does not *enforce* presence of required fields |
-| No Number-Only Titles                            | ❌               | Not enforced in logic                                      |
-| Unique Titles                                    | ❌               | Not validated                                              |
-| Delimiters for CV Fields                         | ❌               | No logic to validate semicolon/pipe consistency            |
-| Filter Field Optimization (<500 values)          | ✅               | Converts low-uniques to `category`                         |
-| Parent-Child Hierarchy via Filename              | ❌               | Not enforced in logic                                      |
-| Valid Filename Fields for Asset Linking          | ❌               | Not validated                                              |
-| Promote/Indexed Fields                           | ⚠️ Manual        | Not handled via script—configurable in UI                  |
-| Field Grouping & Configuration                   | ⚠️ Manual        | Controlled externally                                      |
-| Supported Metadata Standards (Dublin Core, etc.) | ⚠️ Manual        | Field mapping assumed done prior                           |
+| #    | Quartex Criteria                                 | Script Handles? | Notes                                                      |
+| ---- | ------------------------------------------------ | --------------- | ---------------------------------------------------------- |
+| 1    | CSV Format & UTF-8 Encoding                      | ✅               | Cleaned text, normalized characters                        |
+| 2    | One Record Level per File                        | ✅               | Your CSV is asset-level only                               |
+| 3    | File Size <10MB                                  | ⚠️ Manual        | No automatic file splitting yet                            |
+| 4    | Date Formats (`YYYY-MM-DD`, etc.)                | ✅               | Uses `pd.to_datetime()` and detects valid formats          |
+| 5    | Required Fields Populated                        | ❌               | Cleans, but does not *enforce* presence of required fields |
+| 6    | No Number-Only Titles                            | ❌               | Not enforced in logic                                      |
+| 7    | Unique Titles                                    | ❌               | Not validated                                              |
+| 8    | Delimiters for CV Fields                         | ❌               | No logic to validate semicolon/pipe consistency            |
+| 9    | Filter Field Optimization (<500 values)          | ✅               | Converts low-uniques to `category`                         |
+| 10   | Parent-Child Hierarchy via Filename              | ❌               | Not enforced in logic                                      |
+| 11   | Valid Filename Fields for Asset Linking          | ❌               | Not validated                                              |
+| 12   | Promote/Indexed Fields                           | ⚠️ Manual        | Not handled via script—configurable in UI                  |
+| 13   | Field Grouping & Configuration                   | ⚠️ Manual        | Controlled externally                                      |
+| 14   | Supported Metadata Standards (Dublin Core, etc.) | ⚠️ Manual        | Field mapping assumed done prior                           |
+
 
 
 
