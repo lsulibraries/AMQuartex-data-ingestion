@@ -3,7 +3,7 @@
 This document outlines the current data cleaning pipeline used to prepare MODS-mapped metadata (`step4-output_4.csv`) for ingestion into AM Quartex. It includes:
 
 - Script logic overview
-- Compliance mapping against Quartex import specifications
+- Compliance mapping against Quartex import specifications and [metadata preparation checklist](https://github.com/lsulibraries/AMQuartex-data-ingestion/blob/main/AM%20Quartex%20Metadata%20Preparation%20and%20Data%20Cleaning%20Checklist.md) 
 - Gaps or improvements still needed
 
 ------
