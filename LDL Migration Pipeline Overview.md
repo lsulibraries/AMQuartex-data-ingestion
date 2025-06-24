@@ -31,7 +31,10 @@ This process is designed to ensure that all metadata, digital files, and structu
   - Invalid XMLs, empty MODS, or malformed mappings are logged.
 
 ------
-### 2.2 File names for relationship between files and Contens
+### 2.2 Make sure metadata works wit AMQuartex
+-  How to represent parent child relationships (Between Folder Structure file name and within metadata)
+- New Metadata fields
+- How to represent institutions, collections
 -----
 ### **3. Metadata Cleaning & Normalization (`step5-cleaned.csv`)**
 
