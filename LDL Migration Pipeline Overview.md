@@ -31,8 +31,8 @@ This process is designed to ensure that all metadata, digital files, and structu
   - Invalid XMLs, empty MODS, or malformed mappings are logged.
 
 ------
-### 2+ File names for relationship between files and Contens
----
+### 2.2 File names for relationship between files and Contens
+-----
 ### **3. Metadata Cleaning & Normalization (`step5-cleaned.csv`)**
 
 **Goal**: Clean and normalize metadata to align with Quartex data preparation checklist.
