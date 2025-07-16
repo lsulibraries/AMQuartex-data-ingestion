@@ -42,9 +42,6 @@ Using Python cleaning script:
 - Drop empty/duplicate rows
 - Rename PID format from:
   `collection-name_object-number` → `collection-name:object-number`
-- Normalize file names:
-  `collectionname_123_OBJ.JPG` → `collectionname-objectnumber.EXT`
-
 ---
 
 ## 4. PREPARE FILES FOR UPLOAD:
