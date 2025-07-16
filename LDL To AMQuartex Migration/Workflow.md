@@ -66,7 +66,7 @@ Perform Tasks Bellow to prepare folders containing digital assets to upload to A
 
 3. **Note**
 
-   - No more than 1 nested compound folder is allowed in each collection directory.
+   - No more than 1 nested Asset folder is allowed in each collection directory.
    - All items associated to a compound or any nested compounds within that compound should be placed in 2nd level Compound folder(s)
    - Items (Files, e.g `PDF`, `jpg`, etc)can all be uploaded into a flat folder:
 
