@@ -76,12 +76,9 @@ Perform Tasks Bellow to prepare folders containing digital assets to upload to A
    /Collection/
      item001.jpg
      item002.pdf
-     Compound001/
+     Compound/
        item003.jpg
        item004.jpg
-     Compound002/
-       item005.jpg
-       item006.jpg
    ```
 
    
