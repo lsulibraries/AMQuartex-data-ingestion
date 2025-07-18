@@ -42,8 +42,8 @@ Using Python cleaning script:
 - Drop empty/duplicate rows
 - Rename PID format from:
    `collection-name:object-number`  → `collection-name_object-number`
-  
 **Result:** Clean inital mapping CSV, without relationship data.
+  
 ---
 
 ## 4. PREPARE FILES FOR UPLOAD:
