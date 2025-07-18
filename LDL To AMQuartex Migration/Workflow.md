@@ -1,4 +1,4 @@
-# LDL to AM Quartex Ingestion Workflow
+# LDL - AM Quartex Ingestion Workflow
 
 ### 1. DOWNLOAD ALL ASSETS AND METADATA
 
