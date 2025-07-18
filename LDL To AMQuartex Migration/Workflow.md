@@ -36,58 +36,80 @@ Use `mapping.csv` and run XML-to-CSV scripts to extract MODS metadata.
 
 Using Python cleaning script:
 
-- Normalize column names
+- Normalize column names: Column names should follow same pattern (`field_genre` or `genre`)
+- Convert types: Convert each column data type to a correct datatype (eg. `Date`, `integer`, and `string` format) 
 - Strip non-printables
-- Convert types (dates, ints)
 - Drop empty/duplicate rows
 - Rename PID format from:
-  `collection-name_object-number` → `collection-name:object-number`
+   `collection-name:object-number`  → `collection-name_object-number`
+
 ---
 
 ## 4. PREPARE FILES FOR UPLOAD:
 
-Perform Tasks Bellow to prepare folders containing digital assets to upload to AMQuartex ([Link to article](https://community.quartexcollections.com/blogs/rebecca-lynd1/2025/04/29/preparing-metadata-for-import).)
+#### 1. Folder Structure:
 
-1. **Update item names:**
+In order to ingest files to AMQuartex We need to upload all objects in an specific folder structure Collection by Collection:
 
-   - Must renamed and match `item_file_name` (`PID`s)
-     - Remove `OBJ`, `PDF`, etc. from filename.
-   - Asset **folder** and **filenames** must be **unique**
-   - File name size Under **128** for all files except PDF and **120** for PDFs (AMQuartex recommends keeping filenames under **100** characters to be safe)
-   - Avoid using **double quotation** (single quotation marks are fine)
-   - **Example:** 
-     - File Name:  `dcc-publications_332_OBJ.jpg` ➡ `dcc-publications_332.jpg`
-     - PID Name:  `dcc-publications:332`➡  `dcc-publications_332` 
+#### **Folder Structure in Upload:**
 
-2. **Update Asset Folder names:**
+- **For compound upload:**
+  - No more than 1 nested compound folder is allowed.
+    - 1st Level Folder would be `collection_pid` Or **Collection Name**
 
-   - 1st Level Folder would be `collection_pid` Or **Collection Name**
-   - 2nd Level Folder(s) would be **compound** `PID`s 
+    - 2nd Level Folder(s) would be **compound** `PID`s 
 
-3. **Note**
+  - One folder per compound object
 
-   - AMQuartex only allows for nesting of 2 deep. (Collection outer folder and one asset folder)
-   - All items associated to a compound or any nested compounds within that compound should be placed in 2nd level Compound folder(s)
-   - Items (Files, e.g `PDF`, `jpg`, etc)can all be uploaded into a flat folder:
+  - Folder name = PID of the asset
 
-4. Overall Folder Structure format:
+  - Files inside (not nested further)
 
-   ```
-   /Collection/
-     item001.jpg
-     item002.pdf
-     Compound/
-       item003.jpg
-       item004.jpg
-   ```
+- **For simple assets:**
 
-   
+  - Just place the `.jpg`, `.pdf`, etc. directly in the upload root
+  - No folder needed
+
+**Example folder structure with 1 nested folder for compound assets**
+
+```/Collection/
+/Collection/  
+  item001.jpg
+  item002.pdf
+  Compound001/
+    item003.jpg
+    item004.jpg
+```
+
+**Example folder structure with objects uploaded in a flat collection folder**
+
+```
+/Collection/  
+  item001.jpg
+  item002.pdf
+  item003.jpg #Object within compound object
+  item004.jpg #Object within compound object
+```
+
+
+
+#### **2. Update item names:**
+
+- Must renamed and match `item_file_name` (`PID`s)
+  - Remove `OBJ`, `PDF`, etc. from filename.
+  - e.g `collectionname_123_OBJ.JPG` → `collectionname_123.JPG`
+- Asset **folder** and **filenames** must be **unique**
+- File name size Under **128** for all files except PDF and **120** for PDFs (AMQuartex recommends keeping filenames under **100** characters to be safe)
+- Avoid using **double quotation** (single quotation marks are fine)
+- **Example:** 
+  - File Name:  `dcc-publications_332_OBJ.jpg` ➡ `dcc-publications_332.jpg`
+  - PID Name:  `dcc-publications:332`➡  `dcc-publications-332` 
 
 ---
 
 ## 5. UPLOAD TO AMQartex:
 
-FTP and Quartex Uploader to **upload digital asset files (OBJs: PDF, JPG, JP2, audio, video, etc.)** into the AM Quartex platform **before** ingesting metadata via the ingestion CSV.
+We **upload digital asset files (OBJs: PDF, JPG, JP2, audio, video, etc.)** into the AM Quartex platform using the folder structure we created in the previous step into AMQuartex using FTP or Quartex Uploader to  **before** ingesting metadata via the ingestion CSV.
 
 The ingestion CSV **references filenames** (not paths), and these files must already exist in Quartex for it to attach them during import:
 
@@ -115,33 +137,20 @@ The ingestion CSV **references filenames** (not paths), and these files must alr
 
    - Gives control over whether to overwrite existing assets
 
-#### **Folder Structure in Upload:**
-
-- **For compound upload:**
-
-  - One folder per compound object
-
-  - Folder name = PID of the asset
-
-  - Files inside (not nested further)
-
-- **For simple assets:**
-
-  - Just place the `.jpg`, `.pdf`, etc. directly in the upload root
-  - No folder needed
-
 ---
 
-## 6. PREPARE METADATA CSV:
+## 6. Add Relationship to mapping CSV:
 
-### 1️⃣ Normalize PIDs:
+In order to update our mapping csv to prepare updated ingestion csv, we will add relationship information from our accounting CSV that stores information about parent PIDs for all contents. 
+
+### Step 1. Normalize PIDs:
 
 - Change the PID: 
   - `collectionName_objectNumber` ➡ `collectionName:objectNumber`
   - `dcc-publications:332`➡  `dcc-publications_332` 
 
 
-### 2️⃣ Add Content Relationship Fields to Mapped CSV:
+### Step 2. Add Content Relationship Fields to Mapped CSV:
 
 Update Mapped metadata csv and add required columns for `asset`/`item` relationship:
 
@@ -184,8 +193,16 @@ Update Mapped metadata csv and add required columns for `asset`/`item` relations
    - For **Collection Object** (e.g `lsu-Ag:collection`), either:
      -  `parent_PID` (Which is root)
 5. `collection_pid`  ➡ `collection_name:collection`
+6. `title`:
+   1. Title data can be extracted from either:
+      - Accounting CSV, that stores titles for all content models, while using accounting csv to create relationship data.
+      - Mapping csv that we title data is mapped from MODS files.
 
-### 3️⃣ Distribute Ingestion CSVs in Batches:
+---
+
+## 7. Distribute Ingestion CSVs in Batches:
+
+In order to **ensure reliable recovery and tracking during large ingestions**, we distribute our ingestion CSVs into smaller batches. `This allows us to identify which objects have already been ingested in case the process is interrupted—due to issues like internet failure or server downtime—and resume from the correct point without duplication or data loss.
 
 #### Batch Criteria
 
